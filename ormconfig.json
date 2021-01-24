@@ -1,11 +1,11 @@
 {   
     "name":"default",
-    "type": "mysql",
+    "type": "postgres",
     "host": "localhost",
-    "port": 3306,
-    "username": "root",
-    "password": "marcelo123",
-    "database": "elearning",
+    "port": 5433,
+    "username": "postgres",
+    "password": "docker",
+    "database": "postgres",
     "entities": [
         "./src/modules/**/model/*.ts"
     ],
