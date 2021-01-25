@@ -7,8 +7,8 @@ class CourserController {
         
         try {
             const ormRepo = getRepository(Courser);
-            const course = ormRepo.find();
-            
+            const course = await ormRepo.query(`SELECT * FROM courses`)
+
             return response.json(course);
         } catch (error) {
             return response.json('erro')
