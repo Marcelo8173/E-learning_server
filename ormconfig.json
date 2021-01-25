@@ -7,8 +7,8 @@
     "password": "docker",
     "database": "postgres",
     "entities": [
-        "./src/modules/**/model/*.ts"
-    ],
+        "./src/**/model/*.ts"
+    ], 
     "migrations": [
         "./src/database/migrations/*.ts"
     ],

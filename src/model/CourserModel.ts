@@ -1,11 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, BeforeInsert  } from 'typeorm';
-import { v4 } from 'uuid';
+import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn } from 'typeorm';
 
 
 @Entity('courses')
 class CourserModel {
     @PrimaryGeneratedColumn('uuid')
-    id:string;
+    id:string; 
 
     @Column()
     name: string;
@@ -19,10 +18,6 @@ class CourserModel {
     @UpdateDateColumn()
     updated_at: Date
     
-    @BeforeInsert()
-	addId() {
-		this.id = v4();
-	}
 }
 
 export default CourserModel;

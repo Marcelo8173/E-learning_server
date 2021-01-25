@@ -1,16 +1,20 @@
-import {Request,Response} from 'express';
-import Courser from '../model/Courser/CourserModel';
+import Courser from '../model/CourserModel';
 import { getRepository } from 'typeorm';
+import {Request,Response} from 'express';
 
 class CourserController {
-    public async index(request: Request, response:Response){
+    public async index(request: Request, response: Response ): Promise<Response>{
+        
         try {
-            const ormRepository = getRepository(Courser);
-            return response.json({msg:'Olá'})
-        } catch (error) {
+            const ormRepo = getRepository(Courser);
+            const course = ormRepo.find();
             
+            return response.json(course);
+        } catch (error) {
+            return response.json('erro')
         }
-    }
+        
+    };
 }
 
 export default CourserController;

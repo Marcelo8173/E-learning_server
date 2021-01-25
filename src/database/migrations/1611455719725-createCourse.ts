@@ -37,7 +37,7 @@ export class createCourse1611455719725 implements MigrationInterface {
                         default: 'now()'
                     }
                 ]
-            }) , true
+            })
         )
     }
 
