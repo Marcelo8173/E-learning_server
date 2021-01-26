@@ -2,10 +2,6 @@ import Courser from '../model/CourserModel';
 import { getRepository } from 'typeorm';
 import {Request,Response} from 'express';
 
-interface RequestDTO{
-    name: string;
-    image: string;
-}
 
 class CourserController {
     public async index(request: Request, response: Response ): Promise<Response>{
