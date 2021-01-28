@@ -33,6 +33,18 @@ class CourserController {
         }
         
     };
+
+    public async listCouseById(request: Request, response: Response): Promise<Response>{
+        try {
+            const {id} = request.params;
+            const ormRepository = getRepository(Courser);
+            const course = await ormRepository.query(`select * from courses where(id = '${id}')`);
+
+            return response.json(course)
+        } catch (error) {
+            return response.status(404).json({error:'Course id not found'});
+        }
+    }
 }
 
 export default CourserController;
