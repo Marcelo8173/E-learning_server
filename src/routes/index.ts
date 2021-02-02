@@ -12,6 +12,7 @@ routes.get(`/courses/:id`, couserController.listCouseById);
 routes.post('/courses', couserController.create);
 // create a new lesson
 routes.post('/lesson/:id', lessonController.createLesson);
+routes.get('/lesson/:id', lessonController.indexLesson);
 
 
 export default routes;
