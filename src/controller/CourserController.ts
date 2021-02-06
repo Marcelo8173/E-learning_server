@@ -44,13 +44,19 @@ class CourserController {
             const ormRepository = getRepository(Courser);
             // const course = await ormRepository.query(`select * from courses where(id = '${id}')`);
             const course = await ormRepository.query(`select
-            l.name as lessonName,
-            l.duration,
-            l.description,
-            c.name as couseName,
-            c.image
+                l.name as lessonName,
+                l.duration,
+                l.description,
+                c.name as couseName,
+                c.image
             from lesson l  inner join courses c on l.course_id = c.id where(c.id = '${id}');`)
-            return response.json(course)
+            
+            const count = await ormRepository.query(`select count (id) as lessonQtd from lesson;`)
+
+            return response.json({
+                courses: course,
+                countLesson: count[0].lessonqtd
+            })
         } catch (error) {
             return response.status(404).json({error:'Course id not found'});
         }
