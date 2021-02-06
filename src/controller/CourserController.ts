@@ -9,8 +9,12 @@ class CourserController {
         try {
             const ormRepo = getRepository(Courser);
             const course = await ormRepo.query(`SELECT * FROM courses`)
+            const count = await ormRepo.query(`select count (id) as coursesQtd from courses;`);
 
-            return response.json(course);
+            return response.json({
+                coursesData: course,
+                countCourses:count[0].coursesqtd,
+            });
         } catch (error) {
             return response.json('erro')
         }
