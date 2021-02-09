@@ -7,8 +7,10 @@ class CourserController {
     public async index(request: Request, response: Response ): Promise<Response>{
         
         try {
+            const {search} = request.query;
+
             const ormRepo = getRepository(Courser);
-            const course = await ormRepo.query(`SELECT * FROM courses`)
+            const course = await ormRepo.query(`SELECT * FROM courses WHERE name LIKE '%${search}%' `)
             const count = await ormRepo.query(`select count (id) as coursesQtd from courses;`);
 
             return response.json({
