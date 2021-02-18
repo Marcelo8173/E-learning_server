@@ -9,12 +9,26 @@ class CourserController {
         try {
             const {search} = request.query;
 
+            const courseToSend = [];
             const ormRepo = getRepository(Courser);
             const course = await ormRepo.query(`SELECT * FROM courses WHERE name LIKE '%${search}%' `)
             const count = await ormRepo.query(`select count (id) as coursesQtd from courses;`);
 
+            for (const key in course) {
+                const countLesson = await ormRepo.query(`select count (id) as LessonQtd from lesson where course_id = '${course[key].id}'`);
+                const data = {
+                    id: course[key].id,
+                    name: course[key].name,
+                    image: course[key].image,
+                    lessonQtd: countLesson[0].lessonqtd,
+                    created_at: course[key].created_at,
+                    updated_at: course[key].updated_at
+                }
+                courseToSend.push(data)
+            }
+
             return response.json({
-                coursesData: course,
+                coursesData: courseToSend,
                 countCourses:count[0].coursesqtd,
             });
         } catch (error) {
