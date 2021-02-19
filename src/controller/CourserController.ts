@@ -54,7 +54,25 @@ class CourserController {
         
     };
 
-    public async listCouseById(request: Request, response: Response): Promise<Response>{
+    public async listCourseByid(request: Request, response: Response): Promise<Response>{
+        try {
+            const {id} = request.params;
+            const ormRepo = getRepository(Courser);
+            const course = await ormRepo.query(`select * from courses where id = '${id}'`);
+            const count = await ormRepo.query(`select count(id) as lessonsQtd from lesson where course_id='${id}'`)
+            
+            const dataToSend = {
+                course: course,
+                count: count
+            }
+
+            return response.json(dataToSend);
+        } catch (error) {
+            return response.json('error');
+        }
+    }
+
+    public async listLessonByCourse(request: Request, response: Response): Promise<Response>{
         try {
             const {id} = request.params;
             const ormRepository = getRepository(Courser);
