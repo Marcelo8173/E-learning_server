@@ -8,7 +8,7 @@ const lessonController = new LessonController();
 
 routes.get('/courses', couserController.index);
 routes.get('/courses/:id',couserController.listCourseByid);
-routes.get(`/courses/lesson/:id`, couserController.listLessonByCourse);
+routes.get(`/courses/lesson/:id`, lessonController.listLessonByCourse);
 // por enquanto é necessario passar o url da imagem
 routes.post('/courses', couserController.create);
 // create a new lesson
